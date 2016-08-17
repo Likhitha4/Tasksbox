@@ -1,0 +1,107 @@
+<div class = "row">
+<div class= "page-header"> 
+<h3> Listing Projects </h3>
+</div>
+<div class = "col-md-7">
+
+<b> Filter by:
+   <%= link_to "New", projects_path(status: "New") %>
+   <%= link_to "On-Going", projects_path(status: "On-Going") %>
+   <%= link_to "Completed", projects_path(status: "Completed") %>
+   <%= link_to "All", projects_path %>
+</b>
+   <br/>
+
+<b>Filter by Clients:
+  <% @current_user.clients.each do |client| %>
+  <%= link_to client.name, projects_path(client_id: client.id) %> 
+  <% end %>
+  <%= link_to "All", projects_path %>
+  </b>
+  <br/>
+
+
+<script>
+$(document).ready(function(){
+    $('#myTable').DataTable();
+});
+</script>
+
+
+<%= notice %>
+<% if @projects.empty? %>
+	<p>No projects found</p>
+<% else %>
+
+<table class= "table table-striped" id= "myTable">
+   <thead>
+      <tr>
+      <th>Name</th>
+      <th>Client</th>
+      <th>Start Date</th>
+      <th>end Date</th>
+      <th>status</th>
+      <th>estimated budget</th>
+      <th>Action</th>
+      </tr>
+   </thead>
+     <% @projects.each do |project| %>
+        <tr>
+        <td><%= project.name %></td>
+        <%#= Client.find(project.client_id).name %>
+        <td><%= project.client.nil? ? "N/A" : project.client.name %></td>
+        <td><%= project.start_date.strftime("%A, %d %B %Y") %></td>
+        <td><%= project.end_date.strftime("%A, %d %B %Y") %></td>
+        <td><%= project.status %></td>
+        <td><%= project.estimated_budget %></td>
+        <td><%= link_to "Show", project_path(project.id)%></td>
+        </tr>
+        <% end %>
+        <tbody>
+        </tbody>
+        </table>
+ <% end %>
+ <% if can? :create, Project.new %>
+ <%= link_to "Add project", new_project_path %>
+ <% end %>
+</div>
+
+<div class= "col-md-5">
+<div class = "page-header">
+som stats goes
+</div>
+
+<!--<% #data = {}
+   #data["new"] = @projects.where('status= ?', "New").size
+   #data["on-going"] = @projects.where('status= ?', "On-Going").size
+   #data["completed"] = @projects.where('status= ?', "Completed").size
+%> 
+<%#= pie_chart(data) %>
+</div>
+</div>-->
+
+<%
+  data ={}
+  statuses = @projects.pluck(:status).uniq
+  statuses.each do |status|
+    data[status] = @projects.where('status =?', status).size
+  end
+  %>
+  <%= pie_chart(data) %>
+  </div>
+  </div>
+
+  <div class= "col-md-3">
+  <div class= "page-header">
+  <h3>task count</h3>
+  </div>
+  <% data = {}
+   @projects.each do |project|
+   data[project.name] = project.tasks.count #if project.tasks.size>
+  end
+  %>
+  <%= column_chart(data) %>
+
+
+  </div>
+  </div>

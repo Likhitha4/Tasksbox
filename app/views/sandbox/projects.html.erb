@@ -1,0 +1,42 @@
+<h3> Listing Projects </h3>
+
+<% @projects.each do |project| %>
+  <h3><%= project.name %></h3>
+  <% if project.tasks.empty? %>
+    <p>No Tasks found</p>
+  <% else %>
+  <h4>Total tasks : <%= project.tasks.size %></h4>
+  <ul>
+    <% project.tasks.each do |task| %>
+      <li>
+        <% if task.is_completed %>
+          <s><%= task.title %></s>
+        <% else %>
+          <%= task.title %>
+     <% end %>
+          </li>
+   <% end %>
+          </ul>
+ <% end %>
+ <% end %>
+
+<h4> Total Projects : <%= @projects.size %></h4>
+<table border='1'>
+   <thead>
+      <tr>
+      <th>Name</th>
+      <th>Client</th>
+      <th>Start Date</th>
+      <th>end Date</th>
+      </tr>
+   </thead>
+     <% @projects.each do |project| %>
+        <tr>
+        <td><%= project.name %></td>
+        <td><%= Client.find(project.client_id).name %></td>
+        <td><%= project.start_date.strftime("%A, %d %B %Y") %></td>
+        <td><%= project.end_date.strftime("%A, %d %B %Y") %></td>
+        </tr>
+        <% end %>
+        <tbody>
+        </tbody>

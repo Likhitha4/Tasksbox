@@ -1,0 +1,52 @@
+
+<h1>Total tasks : <%= @tasks.size %></h1>
+
+<% Client.all.each do |client| %>
+  <h4><%= client.name %></h4>
+  <% if client.projects.empty? %>
+  <p> No projects found</p>
+   <% else %>
+   <b>Total projects: <%= client.projects.size %></b>
+
+     <% client.projects.each do |project| %>
+      <h3><%= project.name %></h3> 
+      <% if project.tasks.empty? %>
+           <p>No tasks found</p>
+      <% else %>
+  <ul>
+    <% project.list_tasks.each do |task| %>
+      <li><%= task.title %></li>
+     <% end %>
+   </ul>
+      <% end %>
+      <% end %>
+      <% end %>
+ <% end %>
+ 
+
+<h3>completed task</h3>
+<ul>
+<% @completed_tasks.each do |task| %>
+  <li><%= task.title %></li>
+  <% end %>
+  </ul>
+
+
+
+
+  <h3>incompleted task</h3>
+<ul>
+<% @incompleted_tasks.each do |task| %>
+  <li><%= task.title %></li>
+  <% end %>
+  </ul>
+
+
+  <h3>overdue task</h3>
+<ul>
+<% @over_due_tasks.each do |task| %>
+  <li><%= task.title %></li>
+  <% end %>
+  </ul>
+
+

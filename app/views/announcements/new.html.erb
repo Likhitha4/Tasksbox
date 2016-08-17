@@ -1,0 +1,12 @@
+<h3>Add announcement</h3>
+<%= form_for @announcement do |f| %>
+
+<label>title</label><br/>
+<%= f.text_field :title %><br/>
+
+<label>Body</label><br/>
+<%= f.text_area :body %><br/>
+
+<%= f.submit %>
+
+<% end %>

@@ -1,0 +1,36 @@
+h1>Say#hello</h1>
+<p>Find me in app/views/say/hello.html.erb</p>
+
+
+<a href="/say/hello">say goodbye</a>
+
+<%= link_to "say hello", say_goodbye_path %>
+<%= link_to "say hello", "/say/hello" %> 
+<%= link_to "say products", say_products_path %>
+
+
+
+<% movies = {"U Turn" =>["veeresh,pvr",120,8.4], "Kabali" =>["Inox,lido",144,9.2], "Sultan" => ["Inox,pvr",132,9.8]} %>
+
+
+<h3>Now showing</h3>
+
+
+<ol>
+  <% movies.each do |key,value| %>
+  <li> <%= key %></li>
+  <ul> 
+  <li>theater - <%= value[0] %></li>
+  <li>duration -<%= value[1] %></li>
+  <li>rating -<%= value[2] %></li>3e
+  </ul>
+  <% end %>
+  </ol>
+
+<% signed_in = [true,false].sample %>
+
+<% if signed_in %>
+<p> welcome user </p>
+<% else %>
+<p>Login to continue</p>
+<% end %>

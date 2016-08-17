@@ -1,0 +1,42 @@
+
+<%= link_to "Add client", new_client_path %>
+
+
+<div class="col-md-16">
+<div class= "page-header">
+some statistics goes here
+</div>
+<% data = {}
+current_user.clients.each do |client|
+  data[client.name] = client.projects.count
+end
+%>
+<%= data %>
+
+<%= pie_chart(data) %>
+<%= column_chart(data) %>
+<%= bar_chart(data) %>
+</div>
+
+<%
+  data ={}
+  statuses = @projects.pluck(:status).uniq
+  statuses.each do |status|
+    data[status] = @projects.where('status =?', status).size
+  end
+  %>
+  <%= pie_chart(data) %>
+
+
+  <div class= "page-header">
+  <h3>task count</h3>
+  </div>
+  <% data = {}
+   @projects.each do |project|
+   data[project.name] = project.tasks.count #if project.tasks.size>
+  end
+  %>
+  <%= column_chart(data) %>
+
+
+  

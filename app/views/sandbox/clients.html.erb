@@ -1,0 +1,70 @@
+ <h1>Sandbox#clients</h1>
+<p>Find me in app/views/sandbox/clients.html.erb</p>
+
+<% last_client = Client.last %>
+
+<% if last_client.projects.empty? %>
+  <h3>No projects found. Add your first project</h3>
+<% else %>
+   <ul>
+     <b>Total projects : <%= last_client.projects.size %></b>
+     <% last_client.projects.each do |project| %>
+       <li><%= project.name %></li>
+<% end %>
+</ul>
+<% end %>
+
+
+
+
+<h1>Total clients : <%= @clients.size %></h1>
+
+<% @clients.each do |client| %>
+  <h3><%= client.details.html_safe %></h3> 
+  <ul>
+    <% client.list_projects.each do |project| %>
+      <li><%= project.name %></li>
+      <% end %>
+      </ul>
+      <% end %>
+      <hr/>
+
+<ol>
+ <% @clients.each do |client| %>
+  <li>name - <%= client.name %>, company - <%= client.company %>, mobile - <%=client.mobile %></li>
+  <% end %>
+  </ol>
+
+
+<table border="10">
+<thead>
+<tr>
+<th>#</th>
+<th>Name</th>
+<th>Company</th>
+<th>Mobile</th>
+<th>Email</th>
+  <% @clients.each_with_index do |client,index| %>
+     <tr>
+     <td><%= index + 1 %></td>
+     <td><%= client.name.capitalize %></td>
+     <td><%= client.company.capitalize %></td>
+     <td><%= client.mobile %></td>
+     <td><%= client.email %></td>
+     </tr>
+     <% end %>
+<tbody>
+</tbody>
+</table>
+
+</tr>
+</thead>
+
+
+
+
+
+
+
+
+

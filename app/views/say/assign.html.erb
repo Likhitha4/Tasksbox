@@ -1,0 +1,17 @@
+<% movies = {"U Turn" =>["veeresh,pvr",120,8.4], "Kabali" =>["Inox,lido",144,9.2], "Sultan" => ["Inox,pvr",132,9.8]} %>
+
+
+<h3>Now showing</h3>
+<ol>
+   <% movies.each do |movie| %>
+      <li><%= movie %></li>
+      <% end %>
+</ol>
+
+<% signed_in = [true,false].sample %>
+
+<% if signed_in %>
+<p> welcome user </p>
+<% else %>
+<p>Login to continue</p>
+<% end %>

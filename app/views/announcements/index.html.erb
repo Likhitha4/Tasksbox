@@ -1,0 +1,20 @@
+<h1>Listing announcements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>title</th>
+      <th>body</th>
+    </tr>
+  </thead>
+
+  <tbody>
+        <% @announcements.each do |announcement| %>
+      <tr>
+        <td><%= announcement.title %></td>
+        <td><%= announcement.body %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Add announcement", new_announcement_path %>

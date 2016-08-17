@@ -1,0 +1,48 @@
+<h3> Listing projects</h3>
+<h3><%= @project.name %></h3>
+<table border='1'>
+   <thead>
+      <tr>
+      <th>Name</th>
+      <th>Client</th>
+      <th>Start Date</th>
+      <th>end Date</th>
+      <th>status</th>
+      <th>estimated budget</th>
+      </tr>
+   </thead>
+        <tr>
+        <td><%= @project.name %></td>
+        <%#= Client.find(project.client_id).name %>
+        <%= @project.client.nil? ? "N/A" : @project.client.name %>
+        <td><%= @project.start_date.strftime("%A, %d %B %Y") %></td>
+        <td><%= @project.end_date.strftime("%A, %d %B %Y") %></td>
+        <td><%= @project.estimated_budget %></td>
+        <td><%= @project.status %></td>
+        </tr>
+        <tbody>
+        </tbody>
+</table>
+
+<h3> tasks</h3>
+<table border= "2">
+<thead>
+<tr>
+<th>title</th>
+<th>due date</th>
+<th>completed</th>
+</tr>
+</thead>
+<tbody>
+<% @project.tasks.each do |task| %>
+<tr>
+<td><%= task.title %></td>
+<td><%= task.due_date %></td>
+<td><%= task.is_completed ? "yes" : "no" %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+
+
+
